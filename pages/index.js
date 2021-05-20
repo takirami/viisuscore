@@ -36,7 +36,7 @@ return <Person name={person.fields.name['en-US']} number={person.fields.jonas['e
   );
 }
 
-const Grid = styled.div`
+export const Grid = styled.div`
   display: flex;
   flex-wrap: wrap;
   width: 100%;
