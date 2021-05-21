@@ -32,7 +32,7 @@ export default function Home() {
   }, [people]);
   return (
     <PageWrapper>
-      <Total style={{ opacity: score === 0 ? 0 : 1 }}>{score}</Total>
+      <Total style={{ opacity: score === 0 ? 0 : "0.6" }}>{score}</Total>
       <Grid>
         {people
           .sort((a, b) =>
@@ -43,7 +43,6 @@ export default function Home() {
               : 0
           )
           .map((person) => {
-            console.log(person);
             return (
               <Person
                 name={person.fields.name["en-US"]}
