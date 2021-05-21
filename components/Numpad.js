@@ -4,6 +4,12 @@ import styled from "styled-components";
 import { PageWrapper } from "../components/Styles";
 
 const Numpad = ({ id }) => {
+  const reset = () => {
+    Update({ id: "1Hi4lNBNSB6s8g3cOi36Fh", number: 0 });
+    Update({ id: "36LqEpjIOzb4fF9qblkjj5", number: 0 });
+    Update({ id: "6cSqelYVdSkA3rXbgDdtRR", number: 0 });
+    Update({ id: "63htFZ0hwqHg9It66XWX6a", number: 0 });
+  };
   return (
     <PageWrapper>
       <Grid>
@@ -38,6 +44,11 @@ const Numpad = ({ id }) => {
           <Option>12</Option>
         </Voter>
       </Grid>
+      {id === "6cSqelYVdSkA3rXbgDdtRR" && (
+        <Voter onClick={() => reset()}>
+          <Option>RESET</Option>
+        </Voter>
+      )}
     </PageWrapper>
   );
 };

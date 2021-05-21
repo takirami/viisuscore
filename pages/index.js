@@ -6,7 +6,7 @@ import { PageWrapper } from "../components/Styles";
 const Person = ({ number, name }) => {
   return (
     <Voter>
-      <Vote>{number}</Vote>
+      <Vote style={{ opacity: number === 0 ? 0 : 1 }}>{number}</Vote>
       <Name>{name}</Name>
     </Voter>
   );
@@ -32,7 +32,7 @@ export default function Home() {
   }, [people]);
   return (
     <PageWrapper>
-      <Total>{score}</Total>
+      <Total style={{ opacity: score === 0 ? 0 : 1 }}>{score}</Total>
       <Grid>
         {people
           .sort((a, b) =>
