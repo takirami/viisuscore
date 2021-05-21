@@ -47,10 +47,19 @@ export const Voter = styled.div`
   width: 33%;
   color: white;
   opacity: 0.6;
+  border-radius: 90px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+  &:active {
+    background-color: white;
+    background-opacity: o.5;
+    & > div {
+      color: gray;
+    }
+  }
 `;
 const Option = styled.div`
   font-size: 50px;
