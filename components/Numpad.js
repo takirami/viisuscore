@@ -43,17 +43,37 @@ const Numpad = ({ id }) => {
         <Voter onClick={() => Update({ id: id, number: 12 })}>
           <Option>12</Option>
         </Voter>
+        {id === "6cSqelYVdSkA3rXbgDdtRR" && (
+          <Reset onClick={() => reset()}>
+            <Option>RESET</Option>
+          </Reset>
+        )}
       </Grid>
-      {id === "6cSqelYVdSkA3rXbgDdtRR" && (
-        <Voter onClick={() => reset()}>
-          <Option>RESET</Option>
-        </Voter>
-      )}
     </PageWrapper>
   );
 };
 export default Numpad;
 
+export const Reset = styled.div`
+  width: 66%;
+  color: white;
+  opacity: 0.6;
+  border-radius: 90px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+  &:active {
+    background-color: white;
+    background-opacity: o.5;
+    & > div {
+      color: gray;
+    }
+  }
+`;
 export const Voter = styled.div`
   width: 33%;
   color: white;
