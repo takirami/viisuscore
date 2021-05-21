@@ -52,6 +52,8 @@ export const Voter = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  -webkit-tap-highlight-color: transparent;
   cursor: pointer;
   &:active {
     background-color: white;
