@@ -3,7 +3,7 @@ import { Update } from "../pages/api/hello";
 import styled from "styled-components";
 import { PageWrapper } from "../components/Styles";
 
-const Numpad = (id) => {
+const Numpad = ({ id }) => {
   return (
     <PageWrapper>
       <Grid>
