@@ -7,7 +7,6 @@ const Person = ({ number, name }) => {
   return (
     <Voter>
       <Vote style={{ opacity: number === 0 ? 0 : 1 }}>{number}</Vote>
-      <Name>{name}</Name>
     </Voter>
   );
 };
@@ -19,72 +18,88 @@ export default function Home() {
   useEffect(() => {
     const fetchData = async () => {
       const result = await getAllEntries();
-      setPeople(result);
-      const scoring =
-        result[0].fields.jonas["en-US"] +
-        result[1].fields.jonas["en-US"] +
-        result[2].fields.jonas["en-US"] +
-        result[3].fields.jonas["en-US"];
+      const filtered = result.filter((person) => {
+        return person.fields.jonas["en-US"] > 0
+      })
+      setPeople(filtered);
+      const total = filtered.reduce((prev, person) => {
+        const added = prev + person.fields.jonas["en-US"]
+        return added
+      }, 0)
+      const scoring = Math.round(total / filtered.length)
       setScore(scoring);
     };
     const interval = setInterval(() => fetchData(), 3000);
     return () => clearInterval(interval);
   }, [people]);
+  if (score) {
+    return (
+      <PageWrapper>
+        <Grid>
+          <Votes>
+      
+            {people.map((person) => {
+              return (
+                <Person
+                  name={person.fields.name["en-US"]}
+                  number={person.fields.jonas["en-US"]}
+                />
+              );
+            })}
+          </Votes>
+          <Total style={{opacity: score === 0 ? 0 : "0.6"}}>{score}</Total>
+        </Grid>
+      </PageWrapper>
+    );
+  }
   return (
-    <PageWrapper>
-      <Total style={{ opacity: score === 0 ? 0 : "0.6" }}>{score}</Total>
-      <Grid>
-        {people
-          .sort((a, b) =>
-            a.fields.name["en-US"] > b.fields.name["en-US"]
-              ? 1
-              : b.fields.name["en-US"] > a.fields.name["en-US"]
-              ? -1
-              : 0
-          )
-          .map((person) => {
-            return (
-              <Person
-                name={person.fields.name["en-US"]}
-                number={person.fields.jonas["en-US"]}
-              />
-            );
-          })}
-      </Grid>
+    <PageWrapper> 
+      <VoteNow>
+        Vote Now  
+      </VoteNow>
     </PageWrapper>
-  );
+  )
 }
 
+const VoteNow = styled.div`
+    font-size: 10vw;
+    display:flex;
+    color: white;
+    opacity: 0.6;
+    text-transform: uppercase;
+    font-weight: bold;
+    align-items: center;
+    justify-content: center;
+    width: 100%
+`
 export const Grid = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
   flex-wrap: wrap;
   width: 100%;
 `;
 export const Vote = styled.div`
-  font-size: 600px;
-  margin-bottom: -150px;
-`;
-const Name = styled.div`
-  font-size: 200px;
 `;
 export const Voter = styled.div`
-  width: 50%;
   color: white;
   opacity: 0.6;
-  height: 50vh;
+  font-size: 10vh;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  flex-direction: row;
+  align-items: center
 `;
 const Total = styled.div`
-  position: absolute;
   color: white;
   opacity: 0.6;
   display: flex;
-  width: 100%;
-  height: 100%;
-  font-size: 400px;
+  font-size: 40vw;
   justify-content: center;
   align-items: center;
 `;
+const Votes = styled.div`
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin-left: 160px;
+      align-items: center;
+`
