@@ -1,4 +1,3 @@
-import { Grid } from "../pages/index";
 import { getAllEntries, Update } from "../pages/api/hello";
 import styled from "styled-components";
 import { PageWrapper } from "../components/Styles";
@@ -12,6 +11,7 @@ const Numpad = ({ id }) => {
   };
   return (
     <PageWrapper>
+    <Wrapper>
       <Grid>
         <Voter onClick={() => Update({ id: id, number: 1 })}>
           <Option>1</Option>
@@ -43,12 +43,13 @@ const Numpad = ({ id }) => {
         <Voter onClick={() => Update({ id: id, number: 12 })}>
           <Option>12</Option>
         </Voter>
+      </Grid>
         {id === "6cSqelYVdSkA3rXbgDdtRR" && (
           <Reset onClick={() => reset()}>
             <Option>RESET</Option>
           </Reset>
         )}
-      </Grid>
+    </Wrapper>
     </PageWrapper>
   );
 };
@@ -63,6 +64,7 @@ export const Reset = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: auto auto 40px;
 
   -webkit-tap-highlight-color: transparent;
   cursor: pointer;
@@ -97,3 +99,18 @@ export const Voter = styled.div`
 const Option = styled.div`
   font-size: 50px;
 `;
+
+const Grid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
+  width: 100%;
+  flex-grow: 1;
+`;
+
+const Wrapper = styled.div`
+display: flex;
+flex-direction: column;
+  width: 100%;
+  height: 100vh;
+`
